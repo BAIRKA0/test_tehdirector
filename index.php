@@ -1,12 +1,8 @@
 <?php
 session_start();
-
-// Если пользователь авторизован, перенаправляем на внутреннюю страницу
 if (isset($_SESSION['user'])) {
-    header('Location: pages/dashboard.php');
+    header('Location: pages/main.php');
     exit;
 }
-
-// Если не авторизован, перенаправляем на страницу авторизации
 header('Location: pages/login.php');
 exit;

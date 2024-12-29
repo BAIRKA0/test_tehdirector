@@ -1,3 +1,9 @@
+<?php
+$api_url = 'https://catfact.ninja/fact';
+$response = file_get_contents($api_url);
+$data = json_decode($response, true);
+$cat_fact = $data['fact'] ?? 'Не удалось получить факт о кошках';
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -9,5 +15,9 @@
 <body>
     <h2>Вы авторизовались</h2>
     <a href="login.php" class="link">Выйти</a>
+    <div class="mt-4">
+        <h4>Факт о кошках:</h4>
+        <p><?php echo htmlspecialchars($cat_fact, ENT_QUOTES, 'UTF-8'); ?></p>
+    </div>
 </body>
 </html>
