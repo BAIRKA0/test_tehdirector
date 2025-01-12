@@ -26,31 +26,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+$title = "Регистрация";
+require 'header.php';
 ?>
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Регистрация</title>
-    <link rel="stylesheet" href="../css/test.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-</head>
-<body>
-    <div class="cont">
-        <h2>Регистрация</h2>
-        <form method="POST">
-            <div class="form-group">
-                <label for="email">Электронная почта</label>
-                <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Пароль</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-        </form>
-        <a href="login.php" class="link">Уже есть аккаунт? Войти</a>
-        <?php if (isset($error)) echo "<div class='alert alert-danger'>$error</div>"; ?>
-    </div>
-</body>
-</html>
+<div class="cont">
+    <h2>Регистрация</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="email">Электронная почта</label>
+            <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+    </form>
+    <a href="login.php" class="link">Уже есть аккаунт? Войти</a>
+    <?php if (isset($error)) echo "<div class='alert alert-danger'>$error</div>"; ?>
+</div>
+<?php require 'footer.php'; ?>

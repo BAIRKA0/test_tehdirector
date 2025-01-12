@@ -24,32 +24,24 @@ if (isset($_SESSION['success_message'])) {
     echo "<div class='alert alert-success'>" . htmlspecialchars($_SESSION['success_message'], ENT_QUOTES, 'UTF-8') . "</div>";
     unset($_SESSION['success_message']);
 }
+
+$title = "Авторизация";
+require 'header.php';
 ?>
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Авторизация</title>
-    <link rel="stylesheet" href="../css/test.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-</head>
-<body>
-    <div class="cont">
-        <h2>Авторизация</h2>
-        <form method="POST">
+<div class="cont">
+    <h2>Авторизация</h2>
+    <form method="POST">
+    <div class="form-group">
+            <label for="email">Электронная почта</label>
+            <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>" required>
+        </div>
         <div class="form-group">
-                <label for="email">Электронная почта</label>
-                <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Пароль</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Войти</button>
-        </form>
-        <a href="register.php" class="link">Нет аккаунта? Зарегистрироваться</a>
-        <?php if (isset($error)) echo "<div class='alert alert-danger'>$error</div>"; ?>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-</body>
-</html>
+            <label for="password">Пароль</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Войти</button>
+    </form>
+    <a href="register.php" class="link">Нет аккаунта? Зарегистрироваться</a>
+    <?php if (isset($error)) echo "<div class='alert alert-danger'>$error</div>"; ?>
+</div>
+<?php require 'footer.php'; ?>
