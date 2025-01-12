@@ -1,26 +1,28 @@
 <?php
-session_start();
-require '../db.php';
+require 'user.php';
+
+redirectIfLoggedIn();
+
+$email = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
-
     if (empty($email) || empty($password)) {
         $error = "Все поля должны быть заполнены!";
     } else {
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch();
-
-        if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user'] = $user['email'];
+        if (loginUser($email, $password)) {
             header('Location: main.php');
             exit;
         } else {
             $error = "Логин или пароль введены неверно";
         }
     }
+}
+
+if (isset($_SESSION['success_message'])) {
+    echo "<div class='alert alert-success'>" . htmlspecialchars($_SESSION['success_message'], ENT_QUOTES, 'UTF-8') . "</div>";
+    unset($_SESSION['success_message']);
 }
 ?>
 <!DOCTYPE html>
@@ -35,9 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="cont">
         <h2>Авторизация</h2>
         <form method="POST">
-            <div class="form-group">
+        <div class="form-group">
                 <label for="email">Электронная почта</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+                <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>" required>
             </div>
             <div class="form-group">
                 <label for="password">Пароль</label>

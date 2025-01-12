@@ -1,4 +1,4 @@
-CREATE DATABASE auth;
+-- CREATE DATABASE auth;
 
 USE auth;
 
